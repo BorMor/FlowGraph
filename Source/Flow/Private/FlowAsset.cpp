@@ -485,7 +485,21 @@ void UFlowAsset::LoadInstance(const FFlowAssetSaveData& AssetRecord)
 	{
 		if (UFlowNode* Node = Nodes.FindRef(NodeRecord.NodeGuid))
 		{
-			Node->LoadInstance(NodeRecord);
+			FMemoryReader NodeMemoryReader(NodeRecord.NodeData, true);
+			FFlowArchive NodeAr(NodeMemoryReader);
+			Node->Serialize(NodeAr);
+
+			if (Node->ActivationState != EFlowNodeState::NeverActivated)
+			{
+				RecordedNodes.Add(Node);
+			}
+
+			if (Node->ActivationState == EFlowNodeState::Active)
+			{
+				ActiveNodes.Add(Node);
+			}
+			
+			Node->OnLoad();
 		}
 	}
 
