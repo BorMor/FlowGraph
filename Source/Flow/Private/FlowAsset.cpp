@@ -152,12 +152,13 @@ void UFlowAsset::HarvestNodeConnections()
 			}
 		}
 
+		Node->SetConnections(Connections);
+
 		if (bModified)
 		{
 			Node->SetFlags(RF_Transactional);
 			Node->Modify();
 			
-			Node->SetConnections(Connections);
 			Node->PostEditChange();
 		}
 	}
