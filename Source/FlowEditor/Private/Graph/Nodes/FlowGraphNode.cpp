@@ -151,7 +151,8 @@ void UFlowGraphNode::PostLoad()
 		for (FAssetData const& Asset : FlowAssets)
 		{
 			const FString AssetPath = Asset.ObjectPath.ToString();
-			StaticLoadObject(Asset.GetClass(), nullptr, *AssetPath);
+			//I don't think this is a good idea
+			//StaticLoadObject(Asset.GetClass(), nullptr, *AssetPath);
 		}
 
 		bFlowAssetsLoaded = true;
