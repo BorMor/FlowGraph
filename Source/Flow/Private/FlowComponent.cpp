@@ -212,6 +212,8 @@ void UFlowComponent::OnRep_RemovedIdentityTags()
 
 void UFlowComponent::VerifyIdentityTags() const
 {
+	return;
+	
 	if (IdentityTags.IsEmpty())
 	{
 		LogError(TEXT("Missing Identity Tags on the Flow Component creating Flow Asset instance! This gonna break loading SaveGame for this component!"));
